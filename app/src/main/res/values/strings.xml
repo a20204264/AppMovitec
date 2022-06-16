@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AppMovitec</string>
+    <string name="valcorreo">Ingrese su correo</string>
+    <string name="valclave">Ingrese su Contraseña</string>
+    <string name="valclave2">Confirme su Contraseña</string>
+    <string name="valirSesion">¿Ya tiene cuenta? Inicie Sesión ahora</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="valnombre">Ingrese su Nombre</string>
+    <string name="valdni">Ingrese su Documento</string>
+</resources>

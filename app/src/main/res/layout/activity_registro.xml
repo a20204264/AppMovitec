@@ -58,12 +58,12 @@
         android:id="@+id/tviniciarsesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="88dp"
         android:text="¿Ya tiene cuenta? Inicie Sesión ahora"
         android:textColor="#1976D2"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/edtCorreo" />
 
     <Button
         android:id="@+id/btnregistrar"
@@ -73,66 +73,91 @@
         android:layout_marginTop="32dp"
         android:backgroundTint="#20A5ED"
         android:text="Crear Cuenta"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/tviniciarsesion" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="297dp"
-        android:layout_height="53dp"
-
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/edtcorreo"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/primary">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtcontrasenia"
-            android:layout_width="297dp"
-            android:layout_height="53dp"
-            android:backgroundTint="#FFFFFF"
-            android:ems="15"
-            android:hint="@string/valclave" />
-    </com.google.android.material.textfield.TextInputLayout>
-
     <EditText
-        android:id="@+id/edtnombre"
-        android:layout_width="295dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="12dp"
+        android:id="@+id/edtNombre"
+        android:layout_width="265dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="28dp"
         android:drawableRight="@drawable/cliente"
         android:ems="10"
         android:hint="@string/valnombre"
-        android:inputType="textEmailAddress"
+        android:inputType="textPersonName"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/edtdni"
-        android:layout_width="295dp"
-        android:layout_height="55dp"
+        android:id="@+id/edtDocumento"
+        android:layout_width="265dp"
+        android:layout_height="44dp"
         android:layout_marginTop="12dp"
         android:drawableRight="@drawable/usuarios"
         android:ems="10"
         android:hint="@string/valdni"
-
-        android:inputType="number"
+        android:inputType="textPersonName"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/edtnombre" />
+        app:layout_constraintTop_toBottomOf="@+id/edtNombre" />
 
     <EditText
-        android:id="@+id/edtcorreo"
-        android:layout_width="295dp"
-        android:layout_height="55dp"
+        android:id="@+id/edtCelular"
+        android:layout_width="265dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="12dp"
+        android:drawableRight="@drawable/celular"
+        android:ems="10"
+        android:hint="@string/valTelefono"
+        android:inputType="phone"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/edtDocumento" />
+
+    <EditText
+        android:id="@+id/edtCorreo"
+        android:layout_width="265dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="12dp"
         android:drawableRight="@drawable/email"
         android:ems="10"
         android:hint="@string/valcorreo"
         android:inputType="textEmailAddress"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/edtCelular" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="265dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="0dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/edtdni" />
+        app:layout_constraintTop_toBottomOf="@+id/edtCorreo"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/primary">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtContrasenia"
+            android:layout_width="265dp"
+            android:layout_height="53dp"
+            android:backgroundTint="#FFFFFF"
+            android:ems="15"
+            android:hint="@string/valclave"
+            android:password="true"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

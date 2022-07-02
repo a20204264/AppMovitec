@@ -91,7 +91,8 @@
             android:layout_height="53dp"
             android:backgroundTint="#FFFFFF"
             android:ems="15"
-            android:hint="@string/valclave" />
+            android:hint="@string/valclave"
+            android:password="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <EditText
@@ -104,6 +105,7 @@
         android:ems="10"
         android:hint="@string/valcorreo"
         android:inputType="textEmailAddress"
+        android:password="false"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 

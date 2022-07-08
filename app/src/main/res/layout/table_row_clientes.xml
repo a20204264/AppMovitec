@@ -3,6 +3,7 @@
 
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="400dp"
     android:layout_height="wrap_content">
 
@@ -34,16 +35,18 @@
                 android:layout_width="43dp"
                 android:layout_height="match_parent"
                 android:background="#00FFFFFF"
-                android:onClick="clickTablaEditar"
-                app:srcCompat="@drawable/ic_baseline_edit_24" />
+                android:onClick="clickTablaEditarcliente"
+                app:srcCompat="@drawable/ic_baseline_edit_24"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             <ImageButton
                 android:id="@+id/colBorrar"
                 android:layout_width="43dp"
                 android:layout_height="match_parent"
                 android:backgroundTint="#00FFFFFF"
-                android:onClick="clickTablaBorrar"
-                app:srcCompat="@drawable/borrar" />
+                android:onClick="clickTablaBorrarcli"
+                app:srcCompat="@drawable/borrar"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         </TableRow>
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Usuarios.EditarUsuarioActivity">
+    tools:context=".Clientes.NuevoClienteActivity">
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="91dp"
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:inputType="textEmailAddress"
-        android:text="Editar Usuario"
+        android:text="Nuevo Cliente"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -54,16 +54,16 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
-        android:id="@+id/btnguardar"
+        android:id="@+id/btncrearCli"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="108dp"
         android:backgroundTint="#20A5ED"
-        android:text="Guardar"
+        android:text="Crear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.326"
-        app:layout_constraintStart_toEndOf="@+id/btnCancelar" />
+        app:layout_constraintStart_toEndOf="@+id/btnCancelarNewCliente" />
 
     <EditText
         android:id="@+id/edtNombre"
@@ -72,6 +72,7 @@
         android:layout_marginTop="28dp"
         android:drawableRight="@drawable/cliente"
         android:ems="10"
+        android:hint="Ingrese el Nombre Completo"
         android:inputType="textPersonName"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -86,6 +87,7 @@
         android:layout_marginTop="12dp"
         android:drawableRight="@drawable/usuarios"
         android:ems="10"
+        android:hint="Ingrese el documento"
         android:inputType="textPersonName"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -100,6 +102,7 @@
         android:layout_marginTop="12dp"
         android:drawableRight="@drawable/celular"
         android:ems="10"
+        android:hint="Ingrese el Número de Celular"
         android:inputType="phone"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -114,6 +117,7 @@
         android:layout_marginTop="12dp"
         android:drawableRight="@drawable/email"
         android:ems="10"
+        android:hint="Ingrese el Correo"
         android:inputType="textEmailAddress"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -121,33 +125,29 @@
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/edtCelular" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="265dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="0dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/edtCorreo"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/primary">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtContrasenia"
-            android:layout_width="265dp"
-            android:layout_height="53dp"
-            android:backgroundTint="#FFFFFF"
-            android:ems="15"
-            android:password="true" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <EditText
+        android:id="@+id/edtdireccion"
+        android:layout_width="265dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="12dp"
+        android:drawableRight="@drawable/direccion"
+        android:ems="10"
+        android:hint="Ingrese la dirección"
+        android:inputType="textEmailAddress"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/edtCorreo" />
 
     <Button
-        android:id="@+id/btnCancelar"
+        android:id="@+id/btnCancelarNewCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginBottom="120dp"
-        android:backgroundTint="#FF0202"
+        android:layout_marginStart="68dp"
+        android:layout_marginBottom="108dp"
+        android:backgroundTint="#FF0000"
         android:text="Cancelar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2" />

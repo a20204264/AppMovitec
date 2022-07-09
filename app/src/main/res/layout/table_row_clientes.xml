@@ -8,8 +8,8 @@
     android:layout_height="wrap_content">
 
     <TableLayout
-        android:layout_width="386dp"
-        android:layout_height="60dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TableRow
             android:layout_width="match_parent"
@@ -67,6 +67,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView" />
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </TableRow>
 
     </TableLayout>

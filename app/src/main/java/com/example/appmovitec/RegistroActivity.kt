@@ -12,7 +12,10 @@ import com.android.volley.toolbox.Volley
 import com.example.appmovitec.databinding.ActivityRegistroBinding
 
 class RegistroActivity : AppCompatActivity(),View.OnClickListener {
+
     private lateinit var bindingReg:ActivityRegistroBinding
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +24,7 @@ class RegistroActivity : AppCompatActivity(),View.OnClickListener {
 
         bindingReg.tviniciarsesion.setOnClickListener(this)
         bindingReg.btnregistrar.setOnClickListener(this)
+        bindingReg.chkCaptcha.setOnClickListener(this)
 
     }
 
@@ -28,8 +32,13 @@ class RegistroActivity : AppCompatActivity(),View.OnClickListener {
         when(v.id){
             R.id.tviniciarsesion -> irLoginActivity()
             R.id.btnregistrar -> Insertar()
+            R.id.chkCaptcha -> ValidarCaptcha()
 
         }
+    }
+
+    private fun ValidarCaptcha() {
+
     }
 
     private fun irLoginActivity() {

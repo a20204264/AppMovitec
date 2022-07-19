@@ -23,9 +23,16 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         binding.tvcontrasenia.setOnClickListener(this)
         binding.btningresar.setOnClickListener(this)
         binding.tvcrearcuenta.setOnClickListener(this)
+    }
 
 
+    override fun onClick(v: View) {
+       when(v.id){
+           R.id.tvcontrasenia ->startActivity(Intent(this,PasswordActivity::class.java))
+           R.id.btningresar -> validarUsuario()
+           R.id.tvcrearcuenta -> startActivity(Intent(this, RegistroActivity::class.java))
 
+       }
     }
 
     private fun validarUsuario() {
@@ -34,8 +41,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         val resultadoPost = object : StringRequest(Request.Method.POST, url,
             Response.Listener { response ->
                 if(!response.isEmpty()){
-                    val intent = Intent(this,HomeActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this,HomeActivity::class.java))
                 }else{
                     Toast.makeText(this, "Usuario o Contraseña Incorrecto", Toast.LENGTH_LONG).show()
                 }
@@ -56,33 +62,4 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         queue.add(resultadoPost)
     }
 
-
-
-
-
-    override fun onClick(v: View) {
-       when(v.id){
-           R.id.tvcontrasenia ->irContraseniaActivity()
-           R.id.btningresar -> validarUsuario()
-           R.id.tvcrearcuenta -> irRegistroActivity()
-
-       }
-    }
-
-    private fun irRegistroActivity() {
-        val regIntent= Intent(this, RegistroActivity::class.java)
-        startActivity(regIntent)
-    }
-
-    private fun ingresar() {
-        val homeintent = Intent(this,
-            HomeActivity::class.java)
-        startActivity(homeintent)
-    }
-
-    private fun irContraseniaActivity() {
-        val passActivity = Intent(this,
-            PasswordActivity::class.java)
-        startActivity(passActivity)
-    }
 }

@@ -18,50 +18,41 @@ import com.example.appmovitec.databinding.ActivityUsuariosBinding
 import org.json.JSONException
 
 class UsuariosActivity : AppCompatActivity(),View.OnClickListener {
-    private lateinit var bindingusu:ActivityUsuariosBinding
+    private lateinit var binding:ActivityUsuariosBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bindingusu = ActivityUsuariosBinding.inflate(layoutInflater)
-        setContentView(bindingusu.root)
+        binding = ActivityUsuariosBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        bindingusu.ivinicio.setOnClickListener(this)
-        bindingusu.btnNuevoUsuario.setOnClickListener(this)
+        binding.ivinicio.setOnClickListener(this)
+        binding.btnNuevoUsuario.setOnClickListener(this)
         CargaTabla()
 
     }
 
     override fun onClick(v: View) {
         when(v.id){
-            R.id.ivinicio -> irHomeActivity()
-            R.id.btnNuevoUsuario ->irNuevoUsuarioActivity()
+            R.id.ivinicio -> startActivity(Intent(this, HomeActivity::class.java))
+            R.id.btnNuevoUsuario ->startActivity(Intent(this, NuevoUsuarioActivity::class.java))
         }
     }
 
-    private fun irNuevoUsuarioActivity() {
-        val intent=Intent(this, NuevoUsuarioActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun irHomeActivity() {
-        val homeIntent = Intent(this, HomeActivity::class.java)
-        startActivity(homeIntent)
-    }
 
     fun clickTablaEditar(view: View){
         var txtId=view.id.toString()
         val intent = Intent(this, EditarUsuarioActivity::class.java)
-        intent.putExtra("id", txtId.toString())
+        intent.putExtra("id", txtId)
         startActivity(intent)
     }
 
 
     fun CargaTabla(){
-        bindingusu.tbUsuarios.removeAllViews()
+        binding.tbUsuarios.removeAllViews()
         var queue= Volley.newRequestQueue(this)
         var url="http://192.168.10.19/movitec/registros.php"
         var jsonObjectRequest= JsonObjectRequest(Request.Method.GET,url,null,
-            Response.Listener { response ->
+            { response ->
                 try {
                     var jsonArray=response.getJSONArray("data")
                     for(i in 0 until jsonArray.length()){
@@ -80,14 +71,14 @@ class UsuariosActivity : AppCompatActivity(),View.OnClickListener {
                         colEditar.id=jsonObject.getString("id").toInt()
                         colBorrar.id=jsonObject.getString("id").toInt()
 
-                        bindingusu.tbUsuarios?.addView(registro)
+                        binding.tbUsuarios.addView(registro)
                     }
 
                 }catch (e: JSONException){
                     e.printStackTrace()
                 }
 
-            }, Response.ErrorListener { error ->
+            }, { error ->
 
             })
         queue.add(jsonObjectRequest)
@@ -106,7 +97,7 @@ class UsuariosActivity : AppCompatActivity(),View.OnClickListener {
                 Toast.makeText(this, "Error al eliminar el usuario $error", Toast.LENGTH_LONG).show();
             }
         ){
-            override fun getParams(): MutableMap<String, String>? {
+            override fun getParams(): MutableMap<String, String>{
                 val parametros = HashMap<String, String>()
                 parametros.put("id",view.id.toString())
                 return parametros

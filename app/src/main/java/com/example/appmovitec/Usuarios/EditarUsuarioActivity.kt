@@ -25,20 +25,21 @@ class EditarUsuarioActivity : AppCompatActivity(),View.OnClickListener {
         binding.btnguardar.setOnClickListener(this)
         binding.btnCancelar.setOnClickListener(this)
 
+        //obtenemos el id del UsuarioActivity:
         idGlobal =intent.getStringExtra("id").toString()
         val queue=Volley.newRequestQueue(this)
 
         val url = "http://192.168.10.19/movitec/registro.php?id=$idGlobal"
         val jsonObjectRequest= JsonObjectRequest(
             Request.Method.GET, url, null,
-            Response.Listener { response ->
-                binding.edtNombre?.setText(response.getString("nombre"))
-                binding.edtDocumento?.setText(response.getString("documento"))
-                binding.edtCorreo?.setText(response.getString("email"))
-                binding.edtCelular?.setText(response.getString("telefono"))
-                binding.edtContrasenia?.setText(response.getString("pass"))
+            { response ->
+                binding.edtNombre.setText(response.getString("nombre"))
+                binding.edtDocumento.setText(response.getString("documento"))
+                binding.edtCorreo.setText(response.getString("email"))
+                binding.edtCelular.setText(response.getString("telefono"))
+                binding.edtContrasenia.setText(response.getString("pass"))
 
-            }, Response.ErrorListener { error ->
+            }, { error ->
                 Toast.makeText(this,error.toString(), Toast.LENGTH_LONG).show()
             }
         )
@@ -47,18 +48,11 @@ class EditarUsuarioActivity : AppCompatActivity(),View.OnClickListener {
 
     override fun onClick(v: View) {
         when(v.id){
-
             R.id.btnguardar -> GuardarUsuario()
-            R.id.btnCancelar -> CancelarEditarUsuario()
-
-
+            R.id.btnCancelar ->  startActivity(Intent(this, UsuariosActivity::class.java))
         }
     }
 
-    private fun CancelarEditarUsuario() {
-        val intent = Intent(this, UsuariosActivity::class.java)
-        startActivity(intent)
-    }
 
     private fun GuardarUsuario() {
         val url = "http://192.168.10.19/movitec/editar.php"
@@ -66,14 +60,13 @@ class EditarUsuarioActivity : AppCompatActivity(),View.OnClickListener {
         val resultadoPost=object : StringRequest(Request.Method.POST,url,
             Response.Listener { response ->
                 Toast.makeText(this,"El usuario se edito Correctamente",Toast.LENGTH_LONG).show();
-                var intent = Intent(this, UsuariosActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, UsuariosActivity::class.java))
 
             },Response.ErrorListener { error ->
                 Toast.makeText(this,"Error al editar el usuario $error",Toast.LENGTH_LONG).show();
             }
         ){
-            override fun getParams(): MutableMap<String, String>? {
+            override fun getParams(): MutableMap<String, String>{
                 val parametros = HashMap<String, String>()
                 parametros.put("id",idGlobal!!)
                 parametros.put("nombre",binding.edtNombre.text.toString())

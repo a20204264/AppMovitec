@@ -27,15 +27,11 @@ class NuevoUsuarioActivity : AppCompatActivity(),View.OnClickListener {
     override fun onClick(v: View) {
         when(v.id){
             R.id.btncrear ->Insertar()
-            R.id.btnCancelarNewUsus -> cancelarNuevoUsuario()
+            R.id.btnCancelarNewUsus -> startActivity(Intent(this, UsuariosActivity::class.java))
 
         }
     }
 
-    private fun cancelarNuevoUsuario() {
-        val intent= Intent(this, UsuariosActivity::class.java)
-        startActivity(intent)
-    }
 
     private fun Insertar() {
         val url = "http://192.168.10.19/movitec/insertar.php"
@@ -43,8 +39,7 @@ class NuevoUsuarioActivity : AppCompatActivity(),View.OnClickListener {
         var resultadoPost= object : StringRequest(Request.Method.POST,url,
             Response.Listener<String> { response ->
                 Toast.makeText(this,"Usuario registrado exitosamente", Toast.LENGTH_LONG).show()
-                val intent= Intent(this, UsuariosActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, UsuariosActivity::class.java))
 
             }, Response.ErrorListener { error ->
                 Toast.makeText(this,"Error $error", Toast.LENGTH_LONG).show()
@@ -52,11 +47,11 @@ class NuevoUsuarioActivity : AppCompatActivity(),View.OnClickListener {
             override fun getParams(): MutableMap<String, String>? {
                 val parametros = HashMap<String,String>()
 
-                parametros.put("nombre",binding.edtNombre?.text.toString())
-                parametros.put("documento",binding.edtDocumento?.text.toString())
-                parametros.put("email",binding.edtCorreo?.text.toString())
-                parametros.put("telefono",binding.edtCelular?.text.toString())
-                parametros.put("pass",binding.edtContrasenia?.text.toString())
+                parametros.put("nombre",binding.edtNombre.text.toString())
+                parametros.put("documento",binding.edtDocumento.text.toString())
+                parametros.put("email",binding.edtCorreo.text.toString())
+                parametros.put("telefono",binding.edtCelular.text.toString())
+                parametros.put("pass",binding.edtContrasenia.text.toString())
                 return parametros
             }
         }

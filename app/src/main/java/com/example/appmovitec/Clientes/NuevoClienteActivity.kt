@@ -27,14 +27,9 @@ class NuevoClienteActivity : AppCompatActivity(),View.OnClickListener {
     override fun onClick(v: View) {
         when(v.id){
             R.id.btncrearCli -> CrearCliente()
-            R.id.btnCancelarNewCliente -> CancelarNuevoCliente()
+            R.id.btnCancelarNewCliente -> startActivity(Intent(this, ClienteActivity::class.java))
         }
 
-    }
-
-    private fun CancelarNuevoCliente() {
-        val intent= Intent(this, ClienteActivity::class.java)
-        startActivity(intent)
     }
 
     private fun CrearCliente() {
@@ -43,20 +38,19 @@ class NuevoClienteActivity : AppCompatActivity(),View.OnClickListener {
         var resultadoPost= object : StringRequest(Request.Method.POST,url,
             Response.Listener<String> { response ->
                 Toast.makeText(this,"Cliente registrado exitosamente", Toast.LENGTH_LONG).show()
-                val intent= Intent(this, ClienteActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, ClienteActivity::class.java))
 
             }, Response.ErrorListener { error ->
                 Toast.makeText(this,"Error $error", Toast.LENGTH_LONG).show()
             }){
-            override fun getParams(): MutableMap<String, String>? {
+            override fun getParams(): MutableMap<String, String> {
                 val parametros = HashMap<String,String>()
 
-                parametros.put("nombre",binding.edtNombre?.text.toString())
-                parametros.put("documento",binding.edtDocumento?.text.toString())
-                parametros.put("email",binding.edtCorreo?.text.toString())
-                parametros.put("telefono",binding.edtCelular?.text.toString())
-                parametros.put("direccion",binding.edtdireccion?.text.toString())
+                parametros.put("nombre",binding.edtNombre.text.toString())
+                parametros.put("documento",binding.edtDocumento.text.toString())
+                parametros.put("email",binding.edtCorreo.text.toString())
+                parametros.put("telefono",binding.edtCelular.text.toString())
+                parametros.put("direccion",binding.edtdireccion.text.toString())
                 return parametros
             }
         }

@@ -32,16 +32,16 @@
             android:name=".RegistroActivity"
             android:exported="false" />
         <activity
-            android:name=".EquiposActivity"
+            android:name=".Equipos.EquiposActivity"
             android:exported="false" />
         <activity
-            android:name=".EmpleadosActivity"
+            android:name=".Empleados.EmpleadosActivity"
             android:exported="false" />
         <activity
             android:name=".Usuarios.UsuariosActivity"
             android:exported="false" />
         <activity
-            android:name=".PlanesActivity"
+            android:name=".Planes.PlanesActivity"
             android:exported="false" />
         <activity
             android:name=".Clientes.ClienteActivity"

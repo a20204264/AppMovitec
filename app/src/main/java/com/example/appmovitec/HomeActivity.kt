@@ -5,70 +5,43 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.example.appmovitec.Clientes.ClienteActivity
+import com.example.appmovitec.Empleados.EmpleadosActivity
+import com.example.appmovitec.Equipos.EquiposActivity
+import com.example.appmovitec.Planes.PlanesActivity
 import com.example.appmovitec.Usuarios.UsuariosActivity
 import com.example.appmovitec.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var bindinghome:ActivityHomeBinding
+    private lateinit var binding:ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bindinghome = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(bindinghome.root)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        bindinghome.ibclientes.setOnClickListener(this)
-        bindinghome.ibempleados.setOnClickListener(this)
-        bindinghome.ibusuarios.setOnClickListener(this)
-        bindinghome.ibplanes.setOnClickListener(this)
-        bindinghome.ibequipos.setOnClickListener(this)
-        bindinghome.ivlogout.setOnClickListener(this)
+        binding.ibclientes.setOnClickListener(this)
+        binding.ibempleados.setOnClickListener(this)
+        binding.ibusuarios.setOnClickListener(this)
+        binding.ibplanes.setOnClickListener(this)
+        binding.ibequipos.setOnClickListener(this)
+        binding.ivlogout.setOnClickListener(this)
 
 
     }
 
     override fun onClick(v: View) {
         when(v.id){
-            R.id.ibclientes -> irClienteActivity()
-            R.id.ibempleados -> irEmpleadoActivity()
-            R.id.ibusuarios -> irUsuariosActivity()
-            R.id.ibplanes -> irPlanesActivity()
-            R.id.ibequipos -> irEquiposActivity()
-            R.id.ivlogout -> irLoginActivity()
-
-
+            R.id.ibclientes -> startActivity(Intent(this, ClienteActivity::class.java))
+            R.id.ibempleados -> startActivity(Intent(this, EmpleadosActivity::class.java))
+            R.id.ibusuarios -> startActivity(Intent(this, UsuariosActivity::class.java))
+            R.id.ibplanes -> startActivity(Intent(this, PlanesActivity::class.java))
+            R.id.ibequipos -> startActivity(Intent(this, EquiposActivity::class.java))
+            R.id.ivlogout -> startActivity(Intent(this, LoginActivity::class.java))
 
         }
     }
 
-    private fun irLoginActivity() {
-        val loginIntent = Intent(this, LoginActivity::class.java)
-        startActivity(loginIntent)
-    }
-
-    private fun irEquiposActivity() {
-        val equipIntent = Intent(this, EquiposActivity::class.java)
-        startActivity(equipIntent)
-    }
 
 
-    private fun irPlanesActivity() {
-        val planesIntent = Intent(this, PlanesActivity::class.java)
-        startActivity(planesIntent)
-    }
-
-    private fun irEmpleadoActivity() {
-        val empleadoIntent= Intent(this, EmpleadosActivity::class.java)
-        startActivity(empleadoIntent)
-    }
-
-    private fun irUsuariosActivity() {
-        val usuariosIntent = Intent(this, UsuariosActivity::class.java)
-        startActivity(usuariosIntent)
-    }
-
-    private fun irClienteActivity() {
-        val clienteIntent = Intent(this, ClienteActivity::class.java)
-        startActivity(clienteIntent)
-    }
 }

@@ -13,24 +13,22 @@ import com.example.appmovitec.databinding.ActivityRegistroBinding
 
 class RegistroActivity : AppCompatActivity(),View.OnClickListener {
 
-    private lateinit var bindingReg:ActivityRegistroBinding
-
-
+    private lateinit var binding:ActivityRegistroBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bindingReg = ActivityRegistroBinding.inflate(layoutInflater)
-        setContentView(bindingReg.root)
+        binding = ActivityRegistroBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        bindingReg.tviniciarsesion.setOnClickListener(this)
-        bindingReg.btnregistrar.setOnClickListener(this)
-        bindingReg.chkCaptcha.setOnClickListener(this)
+        binding.tviniciarsesion.setOnClickListener(this)
+        binding.btnregistrar.setOnClickListener(this)
+        binding.chkCaptcha.setOnClickListener(this)
 
     }
 
     override fun onClick(v: View) {
         when(v.id){
-            R.id.tviniciarsesion -> irLoginActivity()
+            R.id.tviniciarsesion -> startActivity(Intent(this, LoginActivity::class.java))
             R.id.btnregistrar -> Insertar()
             R.id.chkCaptcha -> ValidarCaptcha()
 
@@ -38,12 +36,7 @@ class RegistroActivity : AppCompatActivity(),View.OnClickListener {
     }
 
     private fun ValidarCaptcha() {
-
-    }
-
-    private fun irLoginActivity() {
-        val logIntent = Intent(this, LoginActivity::class.java)
-        startActivity(logIntent)
+            //en construcción
     }
 
 
@@ -53,20 +46,19 @@ class RegistroActivity : AppCompatActivity(),View.OnClickListener {
         var resultadoPost= object : StringRequest(Request.Method.POST,url,
             Response.Listener<String> { response ->
                 Toast.makeText(this,"Usuario registrado exitosamente", Toast.LENGTH_LONG).show()
-                val intent=Intent(this,LoginActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this,LoginActivity::class.java))
 
             }, Response.ErrorListener { error ->
                 Toast.makeText(this,"Error $error", Toast.LENGTH_LONG).show()
             }){
-            override fun getParams(): MutableMap<String, String>? {
+            override fun getParams(): MutableMap<String, String>{
                 val parametros = HashMap<String,String>()
 
-                parametros.put("nombre",bindingReg.edtNombre?.text.toString())
-                parametros.put("documento",bindingReg.edtDocumento?.text.toString())
-                parametros.put("email",bindingReg.edtCorreo?.text.toString())
-                parametros.put("telefono",bindingReg.edtCelular?.text.toString())
-                parametros.put("pass",bindingReg.edtContrasenia?.text.toString())
+                parametros.put("nombre",binding.edtNombre.text.toString())
+                parametros.put("documento",binding.edtDocumento.text.toString())
+                parametros.put("email",binding.edtCorreo.text.toString())
+                parametros.put("telefono",binding.edtCelular.text.toString())
+                parametros.put("pass",binding.edtContrasenia.text.toString())
                 return parametros
             }
         }

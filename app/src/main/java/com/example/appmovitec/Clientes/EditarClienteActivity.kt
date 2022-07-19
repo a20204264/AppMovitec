@@ -30,14 +30,14 @@ class EditarClienteActivity : AppCompatActivity(),View.OnClickListener {
         val url = "http://192.168.10.19/movitec/registrocli.php?id=$idGlobal"
         val jsonObjectRequest= JsonObjectRequest(
             Request.Method.GET, url, null,
-            Response.Listener { response ->
-                binding.edtNombre?.setText(response.getString("nombre"))
-                binding.edtDocumento?.setText(response.getString("documento"))
-                binding.edtCorreo?.setText(response.getString("email"))
-                binding.edtCelular?.setText(response.getString("telefono"))
-                binding.edtdireccion?.setText(response.getString("direccion"))
+            { response ->
+                binding.edtNombre.setText(response.getString("nombre"))
+                binding.edtDocumento.setText(response.getString("documento"))
+                binding.edtCorreo.setText(response.getString("email"))
+                binding.edtCelular.setText(response.getString("telefono"))
+                binding.edtdireccion.setText(response.getString("direccion"))
 
-            }, Response.ErrorListener { error ->
+            }, { error ->
                 Toast.makeText(this,error.toString(), Toast.LENGTH_LONG).show()
             }
         )
@@ -51,15 +51,11 @@ class EditarClienteActivity : AppCompatActivity(),View.OnClickListener {
     override fun onClick(v: View) {
         when(v.id){
             R.id.btneditarCli -> GuardarCliente()
-            R.id.btnCancelarEditCliente ->CancelarEditarcliente()
+            R.id.btnCancelarEditCliente ->startActivity(Intent(this, ClienteActivity::class.java))
         }
 
     }
 
-    private fun CancelarEditarcliente() {
-        val intent = Intent(this, ClienteActivity::class.java)
-        startActivity(intent)
-    }
 
     private fun GuardarCliente() {
         val url = "http://192.168.10.19/movitec/editarcli.php"
@@ -67,14 +63,13 @@ class EditarClienteActivity : AppCompatActivity(),View.OnClickListener {
         val resultadoPost=object : StringRequest(Request.Method.POST,url,
             Response.Listener { response ->
                 Toast.makeText(this,"El Cliente se edito Correctamente",Toast.LENGTH_LONG).show();
-                var intent = Intent(this, ClienteActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, ClienteActivity::class.java))
 
             },Response.ErrorListener { error ->
                 Toast.makeText(this,"Error al editar al cliente $error",Toast.LENGTH_LONG).show();
             }
         ){
-            override fun getParams(): MutableMap<String, String>? {
+            override fun getParams(): MutableMap<String, String> {
                 val parametros = HashMap<String, String>()
                 parametros.put("id",idGlobal!!)
                 parametros.put("nombre",binding.edtNombre.text.toString())

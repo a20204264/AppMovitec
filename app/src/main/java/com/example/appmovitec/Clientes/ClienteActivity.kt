@@ -18,50 +18,41 @@ import com.example.appmovitec.databinding.ActivityClienteBinding
 import org.json.JSONException
 
 class ClienteActivity : AppCompatActivity(),View.OnClickListener {
-    private lateinit var bindingcli:ActivityClienteBinding
+    private lateinit var binding:ActivityClienteBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bindingcli = ActivityClienteBinding.inflate(layoutInflater)
-        setContentView(bindingcli.root)
+        binding = ActivityClienteBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        bindingcli.ivinicio.setOnClickListener(this)
-        bindingcli.btnNuevoCliente.setOnClickListener(this)
+        binding.ivinicio.setOnClickListener(this)
+        binding.btnNuevoCliente.setOnClickListener(this)
         CargaTabla()
 
     }
 
     override fun onClick(v: View) {
         when(v.id){
-            R.id.ivinicio -> irHomeActivity()
-            R.id.btnNuevoCliente -> irNuevoClienteActivity()
+            R.id.ivinicio -> startActivity(Intent(this, HomeActivity::class.java))
+            R.id.btnNuevoCliente -> startActivity(Intent(this, NuevoClienteActivity::class.java))
 
         }
     }
 
-    private fun irNuevoClienteActivity() {
-        val intent=Intent(this, NuevoClienteActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun irHomeActivity() {
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent)
-    }
 
     fun clickTablaEditarcliente(view: View){
         var txtId=view.id.toString()
         val intent = Intent(this, EditarClienteActivity::class.java)
-        intent.putExtra("id", txtId.toString())
+        intent.putExtra("id", txtId)
         startActivity(intent)
     }
 
     fun CargaTabla(){
-        bindingcli.tbclientes.removeAllViews()
+        binding.tbclientes.removeAllViews()
         var queue= Volley.newRequestQueue(this)
         var url="http://192.168.10.19/movitec/registrosclientes.php"
         var jsonObjectRequest= JsonObjectRequest(Request.Method.GET,url,null,
-            Response.Listener { response ->
+            { response ->
                 try {
                     var jsonArray=response.getJSONArray("data")
                     for(i in 0 until jsonArray.length()){
@@ -80,14 +71,14 @@ class ClienteActivity : AppCompatActivity(),View.OnClickListener {
                         colEditar.id=jsonObject.getString("id").toInt()
                         colBorrar.id=jsonObject.getString("id").toInt()
 
-                        bindingcli.tbclientes?.addView(registro)
+                        binding.tbclientes.addView(registro)
                     }
 
                 }catch (e: JSONException){
                     e.printStackTrace()
                 }
 
-            }, Response.ErrorListener { error ->
+            }, { error ->
 
             })
         queue.add(jsonObjectRequest)
@@ -106,7 +97,7 @@ class ClienteActivity : AppCompatActivity(),View.OnClickListener {
                 Toast.makeText(this, "Error al eliminar el Cliente $error", Toast.LENGTH_LONG).show();
             }
         ){
-            override fun getParams(): MutableMap<String, String>? {
+            override fun getParams(): MutableMap<String, String>{
                 val parametros = HashMap<String, String>()
                 parametros.put("id",view.id.toString())
                 return parametros

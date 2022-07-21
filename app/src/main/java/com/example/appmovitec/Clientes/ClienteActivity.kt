@@ -50,7 +50,7 @@ class ClienteActivity : AppCompatActivity(),View.OnClickListener {
     fun CargaTabla(){
         binding.tbclientes.removeAllViews()
         var queue= Volley.newRequestQueue(this)
-        var url="http://192.168.10.19/movitec/registrosclientes.php"
+        var url="http://192.168.10.19/movitec/registroscli.php"
         var jsonObjectRequest= JsonObjectRequest(Request.Method.GET,url,null,
             { response ->
                 try {

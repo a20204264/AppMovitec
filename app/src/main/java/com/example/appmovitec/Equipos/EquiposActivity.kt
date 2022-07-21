@@ -3,10 +3,20 @@ package com.example.appmovitec.Equipos
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
+import android.widget.Toast
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.example.appmovitec.Empleados.EditarEmpleadoActivity
 import com.example.appmovitec.HomeActivity
 import com.example.appmovitec.R
 import com.example.appmovitec.databinding.ActivityEquiposBinding
+import org.json.JSONException
 
 class EquiposActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var binding:ActivityEquiposBinding
@@ -17,6 +27,8 @@ class EquiposActivity : AppCompatActivity(),View.OnClickListener {
         setContentView(binding.root)
 
         binding.ivinicio.setOnClickListener(this)
+        binding.btnNuevoEquipo.setOnClickListener(this)
+        CargaTabla()
 
 
     }
@@ -24,7 +36,79 @@ class EquiposActivity : AppCompatActivity(),View.OnClickListener {
     override fun onClick(v: View) {
         when(v.id){
             R.id.ivinicio ->startActivity(Intent(this, HomeActivity::class.java))
+            R.id.btnNuevoEquipo -> startActivity(Intent(this, NuevoEquipoActivity::class.java))
         }
+    }
+
+
+    fun clickTablaEditarequipo(view: View){
+        var txtId=view.id.toString()
+        val intent = Intent(this, EditarEquipoActivity::class.java)
+        intent.putExtra("id", txtId)
+        startActivity(intent)
+    }
+    fun CargaTabla(){
+        binding.tbequipos.removeAllViews()
+        var queue= Volley.newRequestQueue(this)
+        var url="http://192.168.10.19/movitec/registrosequipo.php"
+        var jsonObjectRequest= JsonObjectRequest(
+            Request.Method.GET,url,null,
+            { response ->
+                try {
+                    var jsonArray=response.getJSONArray("data")
+                    for(i in 0 until jsonArray.length()){
+                        var jsonObject=jsonArray.getJSONObject(i)
+                        val registro=
+                            LayoutInflater.from(this).inflate(R.layout.table_row_equipos,null,false)
+                        val colMarca= registro.findViewById<View>(R.id.colMarca) as TextView
+                        val colModelo= registro.findViewById<View>(R.id.colModelo) as TextView
+                        val colSerie = registro.findViewById<View>(R.id.colSerie) as TextView
+                        val colEstado = registro.findViewById<View>(R.id.colEstado) as TextView
+                        val colEditar = registro.findViewById<View>(R.id.colEditar)
+                        val colBorrar= registro.findViewById<View>(R.id.colBorrar)
+
+                        colMarca.text=jsonObject.getString("marca")
+                        colModelo.text=jsonObject.getString("modelo")
+                        colSerie.text=jsonObject.getString("serie")
+                        colEstado.text=jsonObject.getString("estado")
+                        colEditar.id=jsonObject.getString("id").toInt()
+                        colBorrar.id=jsonObject.getString("id").toInt()
+
+                        binding.tbequipos.addView(registro)
+                    }
+
+                }catch (e: JSONException){
+                    e.printStackTrace()
+                }
+
+            }, { error ->
+
+            })
+        queue.add(jsonObjectRequest)
+
+    }
+
+    fun clickTablaBorrarEquipo(view: View){
+        val url = "http://192.168.10.19/movitec/borrarequipo.php"
+        val queue= Volley.newRequestQueue(this)
+        val resultadoPost= object : StringRequest(
+            Request.Method.POST, url,
+            Response.Listener { response ->
+                Toast.makeText(this,"El Equipo se elimino de forma exitosa", Toast.LENGTH_LONG).show();
+                CargaTabla()
+            },
+            Response.ErrorListener { error ->
+                Toast.makeText(this, "Error al eliminar al equipo $error", Toast.LENGTH_LONG).show();
+            }
+        ){
+            override fun getParams(): MutableMap<String, String>{
+                val parametros = HashMap<String, String>()
+                parametros.put("id",view.id.toString())
+                return parametros
+            }
+        }
+        queue.add(resultadoPost)
+        //Toast.makeText(this,view.id.toString(),Toast.LENGTH_LONG).show()
     }
 
 }

@@ -3,32 +3,30 @@
 
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="413dp"
-    android:layout_height="90dp">
+    android:layout_height="wrap_content">
 
     <TableLayout
         android:layout_width="413dp"
-        android:layout_height="80dp">
+        android:layout_height="60dp">
 
         <TableRow
-            android:layout_width="400dp"
-            android:layout_height="21dp"
-            android:background="#83BAF1">
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
+            android:background="#7BB8F4">
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="48dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/usuarios" />
+                app:srcCompat="@drawable/plan" />
 
             <TextView
                 android:id="@+id/colNombre"
-                android:layout_width="196dp"
+                android:layout_width="230dp"
                 android:layout_height="match_parent"
 
                 android:text="TextView"
-                android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -37,45 +35,37 @@
                 android:layout_width="43dp"
                 android:layout_height="match_parent"
                 android:background="#00FFFFFF"
-                android:onClick="clickTablaEditarcliente"
-                app:srcCompat="@drawable/ic_baseline_edit_24"
-                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                android:onClick="clickTablaEditarplan"
+                app:srcCompat="@drawable/ic_baseline_edit_24" />
 
             <ImageButton
                 android:id="@+id/colBorrar"
                 android:layout_width="43dp"
                 android:layout_height="match_parent"
                 android:backgroundTint="#00FFFFFF"
-                android:onClick="clickTablaBorrarcli"
-                app:srcCompat="@drawable/borrar"
-                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-            <CheckBox
-                android:id="@+id/checkBox"
-                android:layout_width="34dp"
-                android:layout_height="wrap_content" />
+                android:onClick="clickTablaBorrarPlan"
+                app:srcCompat="@drawable/borrar" />
 
         </TableRow>
 
         <TableRow
-            android:layout_width="416dp"
-            android:layout_height="33dp"
-            android:background="#BAD8F6">
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#BDD5ED">
 
             <TextView
-                android:id="@+id/colTelefono"
+                android:id="@+id/colVelocidad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView" />
 
             <TextView
-                android:id="@+id/colEmail"
+                android:id="@+id/colCosto"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="TextView" />
-
         </TableRow>
 
     </TableLayout>

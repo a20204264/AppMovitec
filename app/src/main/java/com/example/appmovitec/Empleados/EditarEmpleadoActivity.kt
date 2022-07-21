@@ -1,4 +1,4 @@
-package com.example.appmovitec.Clientes
+package com.example.appmovitec.Empleados
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,25 +10,25 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.appmovitec.Clientes.ClienteActivity
 import com.example.appmovitec.R
-import com.example.appmovitec.databinding.ActivityEditarClienteBinding
+import com.example.appmovitec.databinding.ActivityEditarEmpleadoBinding
 
-class EditarClienteActivity : AppCompatActivity(),View.OnClickListener {
-    private lateinit var binding:ActivityEditarClienteBinding
+class EditarEmpleadoActivity : AppCompatActivity(),View.OnClickListener {
+    private lateinit var binding: ActivityEditarEmpleadoBinding
     var idGlobal: String?=null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityEditarClienteBinding.inflate(layoutInflater)
+        binding= ActivityEditarEmpleadoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btneditarCli.setOnClickListener(this)
-        binding.btnCancelarEditCliente.setOnClickListener(this)
+        binding.btneditarEmpl.setOnClickListener(this)
+        binding.btnCancelarEditEmpleado.setOnClickListener(this)
 
         idGlobal =intent.getStringExtra("id").toString()
         val queue= Volley.newRequestQueue(this)
 
-        val url = "http://192.168.10.19/movitec/registrocli.php?id=$idGlobal"
+        val url = "http://192.168.10.19/movitec/registroempl.php?id=$idGlobal"
         val jsonObjectRequest= JsonObjectRequest(
             Request.Method.GET, url, null,
             { response ->
@@ -45,29 +45,25 @@ class EditarClienteActivity : AppCompatActivity(),View.OnClickListener {
         queue.add(jsonObjectRequest)
 
 
-
-
     }
 
     override fun onClick(v: View) {
         when(v.id){
-            R.id.btneditarCli -> GuardarCliente()
-            R.id.btnCancelarEditCliente ->startActivity(Intent(this, ClienteActivity::class.java))
+            R.id.btneditarEmpl -> GuardarEmpleado()
+            R.id.btnCancelarEditEmpleado -> startActivity(Intent(this,EmpleadosActivity::class.java ))
         }
-
     }
 
-
-    private fun GuardarCliente() {
-        val url = "http://192.168.10.19/movitec/editarcli.php"
+    private fun GuardarEmpleado() {
+        val url = "http://192.168.10.19/movitec/editarempl.php"
         val queue=Volley.newRequestQueue(this)
         val resultadoPost=object : StringRequest(Request.Method.POST,url,
             Response.Listener { response ->
-                Toast.makeText(this,"El Cliente se edito Correctamente",Toast.LENGTH_LONG).show();
-                startActivity(Intent(this, ClienteActivity::class.java))
+                Toast.makeText(this,"El Empleado se edito Correctamente",Toast.LENGTH_LONG).show();
+                startActivity(Intent(this, EmpleadosActivity::class.java))
 
-            },Response.ErrorListener { error ->
-                Toast.makeText(this,"Error al editar al cliente $error",Toast.LENGTH_LONG).show();
+            }, Response.ErrorListener { error ->
+                Toast.makeText(this,"Error al editar al empleado $error",Toast.LENGTH_LONG).show();
             }
         ){
             override fun getParams(): MutableMap<String, String> {
@@ -82,5 +78,4 @@ class EditarClienteActivity : AppCompatActivity(),View.OnClickListener {
         }
         queue.add(resultadoPost)
     }
-
 }

@@ -17,6 +17,24 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Equipos.NuevoEquipoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Equipos.EditarEquipoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Planes.NuevoPlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Planes.EditarPlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Empleados.NuevoEmpleadoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Empleados.EditarEmpleadoActivity"
+            android:exported="false" />
+        <activity
             android:name=".Clientes.EditarClienteActivity"
             android:exported="false" />
         <activity
